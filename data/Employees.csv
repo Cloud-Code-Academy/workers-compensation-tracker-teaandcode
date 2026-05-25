@@ -1,41 +1,41 @@
-Name,Department,Title,Hire Date,Risk Level
-Marcus Johnson,Warehouse,Warehouse Associate,2018-03-15,Standard
-Sarah Chen,Manufacturing,Machine Operator,2019-07-22,Standard
-Darnell Williams,Maintenance,Maintenance Technician,2017-11-08,Standard
-Rosa Martinez,Warehouse,Forklift Operator,2020-02-14,Standard
-Kevin O'Brien,Warehouse,Warehouse Lead,2016-09-30,Standard
-Tanya Patel,Manufacturing,Quality Inspector,2021-01-12,Standard
-James Kowalski,Maintenance,HVAC Technician,2015-06-01,Standard
-Aisha Thompson,Operations,Operations Coordinator,2019-04-20,Standard
-Brian Foster,Warehouse,Shipping Coordinator,2020-08-17,Standard
-Carmen Rivera,Manufacturing,Assembly Technician,2018-12-03,Standard
-Derek Mason,Warehouse,Receiving Clerk,2022-03-07,Standard
-Emily Zhao,HR,HR Generalist,2021-09-14,Standard
-Frank Nguyen,IT,Systems Administrator,2019-05-22,Standard
-Gabrielle Scott,Sales,Account Executive,2020-11-30,Standard
-Henry Brooks,Finance,Financial Analyst,2018-07-16,Standard
-Irene Kim,Manufacturing,CNC Operator,2022-01-25,Standard
-Jason Pierce,Warehouse,Inventory Specialist,2017-04-11,Standard
-Kelly Morrison,Operations,Operations Manager,2016-08-29,Standard
-Luis Delgado,Maintenance,Electrician,2020-06-15,Standard
-Michelle Turner,HR,HR Manager,2015-03-01,Standard
-Nathan Cole,Warehouse,Loader,2023-02-20,Standard
-Olivia Harris,Finance,Accountant,2021-07-08,Standard
-Patrick Lee,IT,Network Engineer,2019-10-14,Standard
-Quinn Adams,Sales,Sales Representative,2022-05-16,Standard
-Rachel Green,Manufacturing,Line Supervisor,2018-04-03,Standard
-Samuel Wright,Maintenance,Plumber,2020-09-22,Standard
-Teresa Banks,Operations,Logistics Coordinator,2021-03-18,Standard
-Ulysses Carter,Warehouse,Warehouse Associate,2023-06-05,Standard
-Vanessa Powell,HR,Recruiter,2022-08-11,Standard
-Walter Evans,Finance,Payroll Specialist,2019-02-27,Standard
-Xena Russell,IT,Help Desk Technician,2023-01-09,Standard
-Yasmine Jenkins,Sales,Sales Manager,2017-11-14,Standard
-Zachary Reed,Manufacturing,Welder,2020-07-30,Standard
-Amber Price,Maintenance,Maintenance Supervisor,2016-05-23,Standard
-Brandon Cox,Warehouse,Forklift Operator,2021-12-07,Standard
-Cassandra Bell,Operations,Safety Officer,2018-09-19,Standard
-Dillon Murphy,Warehouse,Picker/Packer,2022-04-14,Standard
-Eleanor Hayes,Manufacturing,Process Engineer,2019-08-06,Standard
-Fabio Santos,Maintenance,Grounds Maintenance,2023-03-28,Standard
-Grace Hoffman,Sales,Inside Sales Representative,2020-10-01,Standard
+Name,Department,Title,Hire Date,Risk Level,Owner Id
+Marcus Johnson,Warehouse,Warehouse Associate,3/15/2018,Standard,005g5000006IYB3AAO
+Sarah Chen,Manufacturing,Machine Operator,7/22/2019,Standard,005g5000006IYB3AAO
+Darnell Williams,Maintenance,Maintenance Technician,11/8/2017,Standard,005g5000006IYB3AAO
+Rosa Martinez,Warehouse,Forklift Operator,2/14/2020,Standard,005g5000006IYB3AAO
+Kevin O'Brien,Warehouse,Warehouse Lead,9/30/2016,Standard,005g5000006IYB3AAO
+Tanya Patel,Manufacturing,Quality Inspector,1/12/2021,Standard,005g5000006IYB3AAO
+James Kowalski,Maintenance,HVAC Technician,6/1/2015,Standard,005g5000006IYB3AAO
+Aisha Thompson,Operations,Operations Coordinator,4/20/2019,Standard,005g5000006IYB3AAO
+Brian Foster,Warehouse,Shipping Coordinator,8/17/2020,Standard,005g5000006IYB3AAO
+Carmen Rivera,Manufacturing,Assembly Technician,12/3/2018,Standard,005g5000006IYB3AAO
+Derek Mason,Warehouse,Receiving Clerk,3/7/2022,Standard,005g5000006IYB3AAO
+Emily Zhao,HR,HR Generalist,9/14/2021,Standard,005g5000006IYB3AAO
+Frank Nguyen,IT,Systems Administrator,5/22/2019,Standard,005g5000006IYB3AAO
+Gabrielle Scott,Sales,Account Executive,11/30/2020,Standard,005g5000006IYB3AAO
+Henry Brooks,Finance,Financial Analyst,7/16/2018,Standard,005g5000006IYB3AAO
+Irene Kim,Manufacturing,CNC Operator,1/25/2022,Standard,005g5000006IYB3AAO
+Jason Pierce,Warehouse,Inventory Specialist,4/11/2017,Standard,005g5000006IYB3AAO
+Kelly Morrison,Operations,Operations Manager,8/29/2016,Standard,005g5000006IYB3AAO
+Luis Delgado,Maintenance,Electrician,6/15/2020,Standard,005g5000006IYB3AAO
+Michelle Turner,HR,HR Manager,3/1/2015,Standard,005g5000006IYB3AAO
+Nathan Cole,Warehouse,Loader,2/20/2023,Standard,005g5000006IYB3AAO
+Olivia Harris,Finance,Accountant,7/8/2021,Standard,005g5000006IYB3AAO
+Patrick Lee,IT,Network Engineer,10/14/2019,Standard,005g5000006IYB3AAO
+Quinn Adams,Sales,Sales Representative,5/16/2022,Standard,005g5000006IYB3AAO
+Rachel Green,Manufacturing,Line Supervisor,4/3/2018,Standard,005g5000006IYB3AAO
+Samuel Wright,Maintenance,Plumber,9/22/2020,Standard,005g5000006IYB3AAO
+Teresa Banks,Operations,Logistics Coordinator,3/18/2021,Standard,005g5000006IYB3AAO
+Ulysses Carter,Warehouse,Warehouse Associate,6/5/2023,Standard,005g5000006IYB3AAO
+Vanessa Powell,HR,Recruiter,8/11/2022,Standard,005g5000006IYB3AAO
+Walter Evans,Finance,Payroll Specialist,2/27/2019,Standard,005g5000006IYB3AAO
+Xena Russell,IT,Help Desk Technician,1/9/2023,Standard,005g5000006IYB3AAO
+Yasmine Jenkins,Sales,Sales Manager,11/14/2017,Standard,005g5000006IYB3AAO
+Zachary Reed,Manufacturing,Welder,7/30/2020,Standard,005g5000006IYB3AAO
+Amber Price,Maintenance,Maintenance Supervisor,5/23/2016,Standard,005g5000006IYB3AAO
+Brandon Cox,Warehouse,Forklift Operator,12/7/2021,Standard,005g5000006IYB3AAO
+Cassandra Bell,Operations,Safety Officer,9/19/2018,Standard,005g5000006IYB3AAO
+Dillon Murphy,Warehouse,Picker/Packer,4/14/2022,Standard,005g5000006IYB3AAO
+Eleanor Hayes,Manufacturing,Process Engineer,8/6/2019,Standard,005g5000006IYB3AAO
+Fabio Santos,Maintenance,Grounds Maintenance,3/28/2023,Standard,005g5000006IYB3AAO
+Grace Hoffman,Sales,Inside Sales Representative,10/1/2020,Standard,005g5000006IYB3AAO

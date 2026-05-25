@@ -1,4 +1,4 @@
-Claim Number,Incident Date,Date Filed,Status,Settlement Amount,Insurance Provider,Injury Type,Description
+Claim Number,Incident Date,Date Filed,Status,Settlement Amount,Insurance Provider,Injury Type,Notes
 WC-2022-001,2022-01-12,2022-01-15,Settled,5200,Liberty Mutual Insurance,Slip and Fall,Employee slipped on wet warehouse floor near loading dock causing ankle sprain
 WC-2022-003,2022-02-18,2022-02-21,Settled,8500,Liberty Mutual Insurance,Struck By Object,Falling inventory struck employee on shoulder while stocking shelves
 WC-2022-011,2022-06-04,2022-06-07,Settled,12000,Liberty Mutual Insurance,Struck By Object,Pallet rack partial collapse injured warehouse associate
