@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Hire_Date__c</fullName>
+    <description>The employee&apos;s hire date.</description>
+    <inlineHelpText>The employee&apos;s hire date.</inlineHelpText>
+    <label>Hire Date</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>
