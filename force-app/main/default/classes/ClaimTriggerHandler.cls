@@ -28,21 +28,18 @@ public class ClaimTriggerHandler {
                             newClaim.addError('Settlement Amount must be greater than zero before Claim is marked as Settled.');
                         }
 
-                        // If Claim is Denied and Settlement Amount != 0, set Settlement Amount to 0 (there is no payout if your claim is denied!)
-                        else if(newClaim.Status__c == 'Denied' && newClaim.Settlement_Amount__c != 0) {
+                        // If Claim is Denied or in any other Status that is not Settled, and Settlement Amount != 0, set Settlement Amount to 0 (there is no payout if your claim is denied!)
+                        else if((newClaim.Status__c == 'Denied' || newClaim.Status__c != 'Settled') && newClaim.Settlement_Amount__c != 0) {
                             newClaim.Settlement_Amount__c = 0;
                         }
                     }
 
-                    // If Status field on Claim has not been updated and Status = Denied, then Days Open = Date Filed - Incident Date and Settlement Amount = 0
-                    else if(newClaim.Status__c == 'Denied') {
+                    // If Status field on Claim has not been updated and Status = Denied or Settled, then Days Open = Date Filed - Incident Date. If Status = Denied, then Settlement Amount = 0
+                    else if(newClaim.Status__c == 'Denied' || newClaim.Status__c == 'Settled') {
                         newClaim.Days_Open__c = newClaim.Incident_Date__c.daysBetween(newClaim.Date_Filed__c);
-                        newClaim.Settlement_Amount__c = 0;
-                    }
-
-                    // If Status field on Claim has not been updated and Status = Settled, Days Open = Date Filed - Incident Date
-                    else if(newClaim.Status__c == 'Settled') {
-                        newClaim.Days_Open__c = newClaim.Incident_Date__c.daysBetween(newClaim.Date_Filed__c);
+                        if(newClaim.Status__c == 'Denied') {
+                            newClaim.Settlement_Amount__c = 0;
+                        }
                     }
 
                     // If Claim is still open and Status field has not been updated, Days Open = number of days between today and Incident Date
