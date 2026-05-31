@@ -18,31 +18,56 @@ public class ClaimTriggerHandler {
                     // Check if Status field on Claim has been updated and also confirm the records that were updated exist (oldClaimsMap != null)
                     if(oldClaimsMap != null && oldClaimsMap.containsKey(newClaim.Id) && newClaim.Status__c != oldClaimsMap.get(newClaim.Id).Status__c) {
 
-                        // If Claim is Settled and Settlement Amount > 0 and Settlement Date is blank, set Settlement Date to today
-                        if(newClaim.Status__c == 'Settled' && newClaim.Settlement_Date__c == null && newClaim.Settlement_Amount__c > 0 && newClaim.Settlement_Amount__c != null) {
-                            newClaim.Settlement_Date__c = Date.today();
-                        }
-
                         // If Claim is Settled and Settlement Amount <= 0, display an error for user to correct Settlement Amount (a settled claim cannot have a zero or negative payout!)
-                        else if(newClaim.Status__c == 'Settled' && newClaim.Settlement_Amount__c <= 0) {
+                        if(newClaim.Status__c == 'Settled' && (newClaim.Settlement_Amount__c <= 0 || newClaim.Settlement_Amount__c == null)) {
                             newClaim.addError('Settlement Amount must be greater than zero before Claim is marked as Settled.');
                         }
 
+                        // If Claim is Settled and Settlement Amount > 0 and Settlement Date is blank, set Settlement Date to today
+                        // See Claim record where Claim Number = Test On Update 2
+                        else if(newClaim.Status__c == 'Settled' && newClaim.Settlement_Date__c == null && newClaim.Settlement_Amount__c > 0 && newClaim.Settlement_Amount__c != null) {
+                            newClaim.Days_Open__c = newClaim.Incident_Date__c.daysBetween(newClaim.Date_Filed__c);
+                            newClaim.Settlement_Date__c = Date.today();
+                        }
+
                         // If Claim is Denied or in any other Status that is not Settled, and Settlement Amount != 0, set Settlement Amount to 0 (there is no payout if your claim is denied!)
+                        // See Claim record where Claim Number = Test On Update 4
                         else if((newClaim.Status__c == 'Denied' || newClaim.Status__c != 'Settled') && newClaim.Settlement_Amount__c != 0) {
                             newClaim.Settlement_Amount__c = 0;
+                            // Requirements did not explicitly state what should happen with Settlement Date and Days Open if a Claim is Denied
+                            // Add a separate if condition for Status = Denied if it turns out requirements for Settlement Date and Days Open are different than from open Claims
+                            // See Claim record where Claim Number = Test On Update 3 for an example of the updated Claim record if Settlement Date and Days Open are NOT changed when Status updated to Denied
+                            newClaim.Settlement_Date__c = null;
+                            newClaim.Days_Open__c = newClaim.Incident_Date__c.daysBetween(Date.today());
                         }
                     }
 
-                    // If Status field on Claim has not been updated and Status = Denied or Settled, then Days Open = Date Filed - Incident Date. If Status = Denied, then Settlement Amount = 0
-                    else if(newClaim.Status__c == 'Denied' || newClaim.Status__c == 'Settled') {
+                    // If Status on Claim has not been updated and Status = Settled (i.e. if the Claim is created as Settled, not sure if this would happen in real life, but tested it anyway!), then Days Open = Date Filed - Incident Date.
+                    // If Settlement Amount is blank or less than or equal to 0, display an error message because all settled Claims must have a positive Settlement Amount.
+                    // If Settlement Date is blank, set the Settlement Date to today
+                    // See Claim record where Claim Number = Test On Insert 2
+                    else if(newClaim.Status__c == 'Settled') {
                         newClaim.Days_Open__c = newClaim.Incident_Date__c.daysBetween(newClaim.Date_Filed__c);
-                        if(newClaim.Status__c == 'Denied') {
+                        if(newClaim.Settlement_Amount__c == null || newClaim.Settlement_Amount__c <= 0) {
+                            newClaim.addError('Settlement Amount must be greater than zero before Claim is marked as Settled.');
+                        }
+                        if(newClaim.Settlement_Date__c == null) {
+                            newClaim.Settlement_Date__c = Date.today();
+                        }
+                    }
+
+                    // If Status on Claim has not been updated and Status = Denied (i.e. if the Claim is created as Denied), then Days Open = Date Filed - Incident Date
+                    // If Settlement Amount is greater than 0, set Settlement Amount to 0
+                    // See Claim record where Claim Number = Test On Insert 3
+                    else if (newClaim.Status__c == 'Denied') {
+                        newClaim.Days_Open__c = newClaim.Incident_Date__c.daysBetween(newClaim.Date_Filed__c);
+                        if(newClaim.Settlement_Amount__c > 0) {
                             newClaim.Settlement_Amount__c = 0;
                         }
                     }
 
                     // If Claim is still open and Status field has not been updated, Days Open = number of days between today and Incident Date
+                    // See Claim record where Claim Number = Test On Insert 1
                     else if(newClaim.Status__c != 'Settled' && newClaim.Status__c != 'Denied') {
                         newClaim.Days_Open__c = newClaim.Incident_Date__c.daysBetween(Date.today());
                     }
@@ -57,6 +82,7 @@ public class ClaimTriggerHandler {
                 if(oldClaimsMap != null && newClaim.Settlement_Amount__c != oldClaimsMap.get(newClaim.Id).Settlement_Amount__c) {
 
                     // If Settlement Amount equals or exceeds the set threshold, set Is High Value to true
+                    // See Claim record where Claim Number = Test On Update 2
                     if(newClaim.Settlement_Amount__c >= highValueSettlementAmount) {
                         newClaim.Is_High_Value__c = true;
                     }

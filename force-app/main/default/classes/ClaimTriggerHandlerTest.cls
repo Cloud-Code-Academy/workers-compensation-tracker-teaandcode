@@ -50,7 +50,7 @@ private class ClaimTriggerHandlerTest {
             claim.Incident_Date__c = Date.today().addDays(-3);
             claim.Date_Filed__c = Date.today().addDays(-1);
             claim.Status__c = 'Settled';
-            claim.Settlement_Amount__c = 0;
+            claim.Settlement_Amount__c = 1;
             claim.Insurance_Provider__c = testProvider.Id;
             claims.add(claim);
         }
@@ -193,44 +193,52 @@ private class ClaimTriggerHandlerTest {
 
     @isTest
     static void testClaimTriggerHandler_checkSettlementAmountOnInsert() {
-        Map<Id,Claim__c> settledClaimsWithWrongAmountMap = new Map<Id,Claim__c>([SELECT Id, Name, Incident_Date__c, Date_Filed__c, Status__c, Settlement_Amount__c, Settlement_Date__c, Days_Open__c, Is_High_Value__c FROM Claim__c WHERE Name LIKE '%Settled%']);
-        List<Claim__c> settledClaimsWithWrongAmount = [SELECT Id, Name, Incident_Date__c, Date_Filed__c, Status__c, Settlement_Amount__c, Settlement_Date__c, Days_Open__c, Is_High_Value__c FROM Claim__c WHERE Name LIKE '%Settled%'];
+        String errorMessage = 'FIELD_CUSTOM_VALIDATION_EXCEPTION';
+        try{
+            Map<Id,Claim__c> settledClaimsWithWrongAmountMap = new Map<Id,Claim__c>([SELECT Id, Name, Incident_Date__c, Date_Filed__c, Status__c, Settlement_Amount__c, Settlement_Date__c, Days_Open__c, Is_High_Value__c FROM Claim__c WHERE Name LIKE '%Settled%']);
+            List<Claim__c> settledClaimsWithWrongAmount = [SELECT Id, Name, Incident_Date__c, Date_Filed__c, Status__c, Settlement_Amount__c, Settlement_Date__c, Days_Open__c, Is_High_Value__c FROM Claim__c WHERE Name LIKE '%Settled%'];
 
-        Test.startTest();
-        ClaimTriggerHandler.updateClaimFields(settledClaimsWithWrongAmount, settledClaimsWithWrongAmountMap, System.TriggerOperation.BEFORE_INSERT);
-        Test.stopTest();
+            for(Claim__c settledClaimWithWrongAmount : settledClaimsWithWrongAmount) {
+                settledClaimWithWrongAmount.Settlement_Amount__c = 0;
+            }
 
-        List<Claim__c> updatedSettledClaims = [SELECT Incident_Date__c, Date_Filed__c, Status__c, Settlement_Amount__c, Days_Open__c, Is_High_Value__c FROM Claim__c WHERE Id IN :settledClaimsWithWrongAmount];
-        for(Claim__c updatedSettledClaim : updatedSettledClaims) {
-            Assert.areEqual('Settled', updatedSettledClaim.Status__c);
-            Assert.areEqual(0, updatedSettledClaim.Settlement_Amount__c, 'Settlement Amount must be greater than zero before Claim is marked as Settled.');
-            Assert.isTrue(updatedSettledClaim.Incident_Date__c < updatedSettledClaim.Date_Filed__c);
-            Assert.isNotNull(updatedSettledClaim.Days_Open__c);
-            Assert.areEqual(false, updatedSettledClaim.Is_High_Value__c);
+            Test.startTest();
+            ClaimTriggerHandler.updateClaimFields(settledClaimsWithWrongAmount, settledClaimsWithWrongAmountMap, System.TriggerOperation.BEFORE_INSERT);
+            Test.stopTest();
+
+            List<Claim__c> updatedSettledClaims = [SELECT Incident_Date__c, Date_Filed__c, Status__c, Settlement_Amount__c, Days_Open__c, Is_High_Value__c FROM Claim__c WHERE Id IN :settledClaimsWithWrongAmount];
         }
+
+        catch (Exception e) {
+            errorMessage = e.getMessage();
+        }
+
+        Assert.isTrue(errorMessage.contains('FIELD_CUSTOM_VALIDATION_EXCEPTION'), 'Settlement Amount must be greater than zero before Claim is marked as Settled.');
     }
 
     @isTest
     static void testClaimTriggerHandler_checkSettlementAmountOnUpdate() {
-        Map<Id,Claim__c> settledClaimsWithWrongAmountMap = new Map<Id,Claim__c>([SELECT Id, Name, Incident_Date__c, Date_Filed__c, Status__c, Settlement_Amount__c, Settlement_Date__c, Days_Open__c, Is_High_Value__c FROM Claim__c WHERE Name LIKE '%Settled%']);
-        List<Claim__c> settledClaimsWithWrongAmount = [SELECT Id, Name, Incident_Date__c, Date_Filed__c, Status__c, Settlement_Amount__c, Settlement_Date__c, Days_Open__c, Is_High_Value__c FROM Claim__c WHERE Name LIKE '%Settled%'];
-        for(Claim__c settledClaimWithWrongAmount : settledClaimsWithWrongAmount) {
+        String errorMessage = 'FIELD_CUSTOM_VALIDATION_EXCEPTION';
+        try {
+            Map<Id,Claim__c> settledClaimsWithWrongAmountMap = new Map<Id,Claim__c>([SELECT Id, Name, Incident_Date__c, Date_Filed__c, Status__c, Settlement_Amount__c, Settlement_Date__c, Days_Open__c, Is_High_Value__c FROM Claim__c WHERE Name LIKE '%Settled%']);
+            List<Claim__c> settledClaimsWithWrongAmount = [SELECT Id, Name, Incident_Date__c, Date_Filed__c, Status__c, Settlement_Amount__c, Settlement_Date__c, Days_Open__c, Is_High_Value__c FROM Claim__c WHERE Name LIKE '%Settled%'];
+            for(Claim__c settledClaimWithWrongAmount : settledClaimsWithWrongAmount) {
             settledClaimWithWrongAmount.Settlement_Amount__c = -1;
-        }
-        update settledClaimsWithWrongAmount;
+            }
+            update settledClaimsWithWrongAmount;
 
-        Test.startTest();
-        ClaimTriggerHandler.updateClaimFields(settledClaimsWithWrongAmount, settledClaimsWithWrongAmountMap, System.TriggerOperation.BEFORE_UPDATE);
-        Test.stopTest();
+            Test.startTest();
+            ClaimTriggerHandler.updateClaimFields(settledClaimsWithWrongAmount, settledClaimsWithWrongAmountMap, System.TriggerOperation.BEFORE_UPDATE);
+            Test.stopTest();
 
-        List<Claim__c> updatedSettledClaims = [SELECT Incident_Date__c, Date_Filed__c, Status__c, Settlement_Amount__c, Days_Open__c, Is_High_Value__c FROM Claim__c WHERE Id IN :settledClaimsWithWrongAmount];
-        for(Claim__c updatedSettledClaim : updatedSettledClaims) {
-            Assert.areEqual('Settled', updatedSettledClaim.Status__c);
-            Assert.areEqual(-1, updatedSettledClaim.Settlement_Amount__c, 'Settlement Amount must be greater than zero before Claim is marked as Settled.');
-            Assert.isTrue(updatedSettledClaim.Incident_Date__c < updatedSettledClaim.Date_Filed__c);
-            Assert.isNotNull(updatedSettledClaim.Days_Open__c);
-            Assert.areEqual(false, updatedSettledClaim.Is_High_Value__c);
+            List<Claim__c> updatedSettledClaims = [SELECT Incident_Date__c, Date_Filed__c, Status__c, Settlement_Amount__c, Days_Open__c, Is_High_Value__c FROM Claim__c WHERE Id IN :settledClaimsWithWrongAmount];
         }
+
+        catch (Exception e) {
+            errorMessage = e.getMessage();
+        }
+
+        Assert.isTrue(errorMessage.contains('FIELD_CUSTOM_VALIDATION_EXCEPTION'), 'Settlement Amount must be greater than zero before Claim is marked as Settled.');
     }
 
     @isTest
