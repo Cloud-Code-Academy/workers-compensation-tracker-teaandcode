@@ -40,7 +40,7 @@ public class EmployeeClaimTriggerHandler {
 
         // This query returns all Employee Claims associated with employees whose Ids are in the employeeIds set, grouped by employee and provider, with the total amount per provider for each employee
         // Example: Oliver might have $500 in claims with Liberty Mutual and $100 in claims with Zurich
-        List<AggregateResult> claimsByEmployeeAndProvider = [SELECT Employee__c, Claim__r.Insurance_Provider__c, SUM(Claim__r.Settlement_Amount__c) totalAmount FROM Employee_Claim__c WHERE Employee__c IN :employeeIds GROUP BY Employee__c, Claim__r.Insurance_Provider__c];
+        List<AggregateResult> claimsByEmployeeAndProvider = [SELECT Employee__c, Claim__r.Insurance_Provider__c providerId, SUM(Claim__r.Settlement_Amount__c) totalAmount FROM Employee_Claim__c WHERE Employee__c IN :employeeIds GROUP BY Employee__c, Claim__r.Insurance_Provider__c];
 
         // Create a map where the key is the Employee Id and the value is an inner map consisting of Insurance Provider Id (key) and total Settlement Amount by provider (value)
         Map<Id,Map<Id,Decimal>> employeeTotalByInsuranceProvider = new Map<Id,Map<Id,Decimal>>();
@@ -48,7 +48,7 @@ public class EmployeeClaimTriggerHandler {
         // Loop through the AggregateResult list and populate the employeeTotalByInsuranceProvider map
         for(AggregateResult ar : claimsByEmployeeAndProvider) {
             Id employeeId = (Id)ar.get('Employee__c');
-            Id providerId = (Id)ar.get('Insurance_Provider__c');
+            Id providerId = (Id)ar.get('providerId');
             Decimal cumulativeSettlementAmount = (Decimal)ar.get('totalAmount');
             
             if(cumulativeSettlementAmount == null) {
@@ -64,7 +64,10 @@ public class EmployeeClaimTriggerHandler {
             }
         }
 
-        /*
+        System.debug('claimsByEmployeeAndProvider=' + claimsByEmployeeAndProvider);
+        System.debug('employeeTotalByInsuranceProvider=' + employeeTotalByInsuranceProvider);
+
+        
         // Query for Employee Claim records using AggregateResult to calculate the total number of Claims and cumulative Settlement Amount for each Employee
         List<AggregateResult> totalClaimsAndAmountsByEmployee = [SELECT Employee__c, COUNT(Id) totalClaims, SUM(Claim__r.Settlement_Amount__c) totalSettlementAmount FROM Employee_Claim__c WHERE Employee__c IN :employeeIds GROUP BY Employee__c];
 
@@ -82,14 +85,14 @@ public class EmployeeClaimTriggerHandler {
                 settlementTotals.put(employeeId, sumOfSettlementAmount);
             }
         }
-        */
+        
 
         // Build a list of Employees based on the original employeeIds set to update Risk Level
-        List<Employee__c> employeesToUpdate = [SELECT Id, Risk_Level__c FROM Employee__c WHERE Id IN :employeeIds];
+        List<Employee__c> employeesToUpdate = [SELECT Id, Risk_Level__c, Total_Claims__c, Total_Settlement_Amount__c FROM Employee__c WHERE Id IN :employeeIds];
 
         // Loop through the list of Employees
         for(Employee__c employee : employeesToUpdate) {
-            /*
+            
             // If the employee is in the claimCounts map, update their Total Claims field using the map value
             if(claimCounts.containsKey(employee.Id)) {
                 employee.Total_Claims__c = claimCounts.get(employee.Id);
@@ -99,12 +102,38 @@ public class EmployeeClaimTriggerHandler {
             if(settlementTotals.containsKey(employee.Id)) {
                 employee.Total_Settlement_Amount__c = settlementTotals.get(employee.Id);
             }
-            */
+            
 
             // If the employee is in the employeeTotalByInsuranceProvider map, retrieve the inner map containing the employee's related providers and totals
             if(employeeTotalByInsuranceProvider.containsKey(employee.Id)) {
                 // The providersAndTotals map will store the inner map<Id,Decimal> from the employeeTotalByInsuranceProvider map
                 Map<Id,Decimal> providersAndTotals = employeeTotalByInsuranceProvider.get(employee.Id);
+
+                System.debug(
+                'Employee=' + employee.Id +
+                ' Provider Totals=' + providersAndTotals
+                );
+
+
+                String riskLevel = 'Standard';
+
+                for(Decimal totalAmount : providersAndTotals.values()) {
+                    if(totalAmount >= high) {
+                        riskLevel = 'High Risk';
+                        break;
+                    }
+                    if(totalAmount >= medium) {
+                        riskLevel = 'Medium Risk';
+                    }
+                }
+                employee.Risk_Level__c = riskLevel;
+
+                System.debug(
+                'Employee=' + employee.Id +
+                ' Calculated Risk=' + riskLevel
+                );
+
+                /*
                 // Extract the unduplicated provider Ids from the providersAndTotals map
                 Set<Id> providerIds = providersAndTotals.keySet();
                 if(!providerIds.isEmpty()) {
@@ -113,6 +142,7 @@ public class EmployeeClaimTriggerHandler {
                         // If totalAmount is greater than or equal to $20K, Risk Level = High Risk
                         if(totalAmount >= high) {
                             employee.Risk_Level__c = 'High Risk';
+                            break;
                         }
                         // If totalAmount is less than $20K but greater than or equal to $10K, Risk Level = Medium Risk
                         else if(totalAmount >= medium && totalAmount < high) {
@@ -124,17 +154,30 @@ public class EmployeeClaimTriggerHandler {
                         }
                     }
                 }
+                */
             }
         }
 
-        updateClaimCountsAndSettlementAmount(employeeIds);
+        // updateClaimCountsAndSettlementAmount(employeeIds);
 
         // Uncomment this System.debug line if you want to test the code without running an actual DML operation
         // System.debug('Updated risk level ran');
+
+        for(Employee__c emp : employeesToUpdate) {
+        System.debug(
+        'Employee=' + emp.Id +
+        ', Claims=' + emp.Total_Claims__c +
+        ', Settlement=' + emp.Total_Settlement_Amount__c +
+        ', Risk=' + emp.Risk_Level__c
+        );
+}
         
         update employeesToUpdate;
     } 
 
+    /*
+    // Ended up commenting out this method because the Risk Level was not calculating correctly when the method was separated like this, but seems to work when this code is incorporated into the main updateRiskLevel method above
+    // This method is called from the updateRiskLevel method and updates the Total Claims and Total Settlement Amount fields on the Employee record
     private static void updateClaimCountsAndSettlementAmount(Set<Id> employeeIds) {
         List<Employee__c> employeesToUpdate = [SELECT Id, Total_Claims__c, Total_Settlement_Amount__c FROM Employee__c WHERE Id IN :employeeIds];
 
@@ -169,4 +212,5 @@ public class EmployeeClaimTriggerHandler {
 
         update employeesToUpdate;
     }
+    */
 }
