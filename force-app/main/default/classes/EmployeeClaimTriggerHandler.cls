@@ -55,10 +55,13 @@ public class EmployeeClaimTriggerHandler {
                 cumulativeSettlementAmount = 0;
             }
             
+            // If the employee is not yet in the employeeTotalByInsuranceProvider map, add their Id as a key and a map of the current provider and total payout amount for that provider as the value
             if(!employeeTotalByInsuranceProvider.containsKey(employeeId)) {
                 employeeTotalByInsuranceProvider.put(employeeId, new Map<Id,Decimal>{providerId => cumulativeSettlementAmount});
             }
 
+            // If the employee is already in the employeeTotalByInsuranceProvider map, retrieve their Id (key) and put the current provider and their total payout amount into the map (value)
+            // This covers the scenario if an employee has multiple claims across different providers
             else {
                 employeeTotalByInsuranceProvider.get(employeeId).put(providerId, cumulativeSettlementAmount);
             }
@@ -71,9 +74,13 @@ public class EmployeeClaimTriggerHandler {
         // Query for Employee Claim records using AggregateResult to calculate the total number of Claims and cumulative Settlement Amount for each Employee
         List<AggregateResult> totalClaimsAndAmountsByEmployee = [SELECT Employee__c, COUNT(Id) totalClaims, SUM(Claim__r.Settlement_Amount__c) totalSettlementAmount FROM Employee_Claim__c WHERE Employee__c IN :employeeIds GROUP BY Employee__c];
 
+        // Create a map of employee Ids (key) and number of claims for each employee (value)
         Map<Id,Integer> claimCounts = new Map<Id,Integer>();
+
+        // Create a map of employee Ids (key) and cumulative Settlement Amount for each employee (value)
         Map<Id,Decimal> settlementTotals = new Map<Id,Decimal>();
 
+        // Loop through the results of the aggregate SOQL query to populate the claimCounts and settlementTotals maps declared above
         for(AggregateResult ar : totalClaimsAndAmountsByEmployee) {
             Id employeeId = (Id)ar.get('Employee__c');
             Integer numberOfClaims = (Integer)ar.get('totalClaims');
@@ -85,13 +92,16 @@ public class EmployeeClaimTriggerHandler {
                 settlementTotals.put(employeeId, sumOfSettlementAmount);
             }
         }
-        
 
         // Build a list of Employees based on the original employeeIds set to update Risk Level
         List<Employee__c> employeesToUpdate = [SELECT Id, Risk_Level__c, Total_Claims__c, Total_Settlement_Amount__c FROM Employee__c WHERE Id IN :employeeIds];
 
         // Loop through the list of Employees
         for(Employee__c employee : employeesToUpdate) {
+
+            // Set Total Claims and Total Settlement Amount to 0 so that these field values reset if all Employee Claim records are deleted for a given Employee
+            employee.Total_Claims__c = 0;
+            employee.Total_Settlement_Amount__c = 0;
             
             // If the employee is in the claimCounts map, update their Total Claims field using the map value
             if(claimCounts.containsKey(employee.Id)) {
@@ -102,38 +112,39 @@ public class EmployeeClaimTriggerHandler {
             if(settlementTotals.containsKey(employee.Id)) {
                 employee.Total_Settlement_Amount__c = settlementTotals.get(employee.Id);
             }
-            
 
             // If the employee is in the employeeTotalByInsuranceProvider map, retrieve the inner map containing the employee's related providers and totals
             if(employeeTotalByInsuranceProvider.containsKey(employee.Id)) {
+
                 // The providersAndTotals map will store the inner map<Id,Decimal> from the employeeTotalByInsuranceProvider map
                 Map<Id,Decimal> providersAndTotals = employeeTotalByInsuranceProvider.get(employee.Id);
 
-                System.debug(
-                'Employee=' + employee.Id +
-                ' Provider Totals=' + providersAndTotals
-                );
+                System.debug('Employee=' + employee.Id + ' Provider Totals=' + providersAndTotals);
 
-
+                // Initialize riskLevel variable to Standard, which will be the default Risk Level if the medium and high thresholds are not met
                 String riskLevel = 'Standard';
 
                 for(Decimal totalAmount : providersAndTotals.values()) {
+
+                    // Do the High Risk check first, because if an Employee meets the threshold for High Risk, they won't be any other Risk Level
                     if(totalAmount >= high) {
                         riskLevel = 'High Risk';
                         break;
                     }
+
+                    // If the Employee is not High Risk, check if they meet the threshold for Medium Risk
                     if(totalAmount >= medium) {
                         riskLevel = 'Medium Risk';
                     }
                 }
+
+                // Set the Employee's Risk Level to whichever value is determined via the if conditions above, or the default Standard value
                 employee.Risk_Level__c = riskLevel;
 
-                System.debug(
-                'Employee=' + employee.Id +
-                ' Calculated Risk=' + riskLevel
-                );
+                System.debug('Employee=' + employee.Id + ' Calculated Risk=' + riskLevel);
 
                 /*
+                // This code was not correctly setting the Risk Level
                 // Extract the unduplicated provider Ids from the providersAndTotals map
                 Set<Id> providerIds = providersAndTotals.keySet();
                 if(!providerIds.isEmpty()) {
@@ -164,14 +175,10 @@ public class EmployeeClaimTriggerHandler {
         // System.debug('Updated risk level ran');
 
         for(Employee__c emp : employeesToUpdate) {
-        System.debug(
-        'Employee=' + emp.Id +
-        ', Claims=' + emp.Total_Claims__c +
-        ', Settlement=' + emp.Total_Settlement_Amount__c +
-        ', Risk=' + emp.Risk_Level__c
-        );
-}
-        
+            System.debug('Employee=' + emp.Id + ', Claims=' + emp.Total_Claims__c + ', Settlement=' + emp.Total_Settlement_Amount__c + ', Risk=' + emp.Risk_Level__c);
+        }
+
+        // DML to update the Risk Level, Total Claims, and Total Settlement Amount fields on the Employee records
         update employeesToUpdate;
     } 
 
