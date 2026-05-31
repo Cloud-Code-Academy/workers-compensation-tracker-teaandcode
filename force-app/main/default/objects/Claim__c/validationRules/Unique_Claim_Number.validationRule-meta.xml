@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Unique_Claim_Number</fullName>
+    <active>true</active>
+    <description>Enforces a unique value in the Claim Number field.</description>
+    <errorConditionFormula>AND(
+  (VLOOKUP(
+    $ObjectType.Claim__c.Fields.Name,
+    $ObjectType.Claim__c.Fields.Name,
+    Name
+  ) = Name),
+  OR(ISNEW(), ISCHANGED(Name))
+)</errorConditionFormula>
+    <errorDisplayField>Name</errorDisplayField>
+    <errorMessage>Claim Number must be unique.</errorMessage>
+</ValidationRule>

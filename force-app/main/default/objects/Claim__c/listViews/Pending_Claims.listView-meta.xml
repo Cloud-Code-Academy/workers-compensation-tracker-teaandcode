@@ -12,5 +12,10 @@
         <operation>equals</operation>
         <value>Open,In Review</value>
     </filters>
+    <filters>
+        <field>Insurance_Provider__c</field>
+        <operation>notContain</operation>
+        <value>Test</value>
+    </filters>
     <label>Pending Claims</label>
 </ListView>
