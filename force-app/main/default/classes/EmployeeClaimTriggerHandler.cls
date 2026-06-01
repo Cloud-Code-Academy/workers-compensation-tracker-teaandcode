@@ -7,7 +7,9 @@ public class EmployeeClaimTriggerHandler {
         System.TriggerOperation operationType
     ) {
         // Risk thresholds - determined by company; update as needed
-        Decimal standard = 5000;
+        // Standard is < 10000
+        // Medium is >= 10000 but < 20000
+        // High is >= 20000
         Decimal medium = 10000;
         Decimal high = 20000;
 
