@@ -1,0 +1,76 @@
+Claim Number,Incident Date,Date Filed,Status,Settlement Amount,Insurance Provider,Injury Type,Notes,Owner Id
+WC-2022-001,1/12/2022,1/15/2022,Settled,5200,001g500000LGxrFAAT,Slip and Fall,Employee slipped on wet warehouse floor near loading dock causing ankle sprain,005g5000006IYB3AAO
+WC-2022-003,2/18/2022,2/21/2022,Settled,8500,001g500000LGxrFAAT,Struck By Object,Falling inventory struck employee on shoulder while stocking shelves,005g5000006IYB3AAO
+WC-2022-011,6/4/2022,6/7/2022,Settled,12000,001g500000LGxrFAAT,Struck By Object,Pallet rack partial collapse injured warehouse associate,005g5000006IYB3AAO
+WC-2022-007,4/5/2022,4/8/2022,Settled,15000,001g500000LGxrGAAT,Struck By Object,Heavy equipment component dropped and struck employee's foot,005g5000006IYB3AAO
+WC-2022-019,10/10/2022,10/13/2022,Settled,18500,001g500000LGxrGAAT,Struck By Object,Crane load shifted unexpectedly and struck manufacturing worker,005g5000006IYB3AAO
+WC-2022-002,1/28/2022,2/1/2022,Settled,7500,001g500000LGxrHAAT,Equipment Malfunction,Forklift mechanical failure caused crush injury to right hand,005g5000006IYB3AAO
+WC-2022-014,7/22/2022,7/25/2022,Settled,9000,001g500000LGxrHAAT,Equipment Malfunction,Power tool malfunction caused eye injury requiring treatment,005g5000006IYB3AAO
+WC-2022-023,12/6/2022,12/9/2022,Settled,11200,001g500000LGxrHAAT,Equipment Malfunction,Scaffolding gave way injuring two maintenance workers simultaneously (group claim),005g5000006IYB3AAO
+WC-2022-016,8/20/2022,8/23/2022,Settled,20000,001g500000LGxrIAAT,Equipment Malfunction,Forklift tip-over accident caused significant back and rib injuries to operator,005g5000006IYB3AAO
+WC-2022-020,10/20/2022,10/23/2022,Settled,14000,001g500000LGxrJAAT,Equipment Malfunction,HVAC equipment failure caused electrical shock to technician,005g5000006IYB3AAO
+WC-2022-004,2/24/2022,2/26/2022,Settled,3100,001g500000LGxrJAAT,Repetitive Motion,Repetitive strain injury to wrist from extended assembly line work,005g5000006IYB3AAO
+WC-2022-005,3/9/2022,3/11/2022,Settled,4800,001g500000LGxrFAAT,Slip and Fall,Employee tripped on uneven flooring in shipping area causing knee contusion,005g5000006IYB3AAO
+WC-2022-006,3/21/2022,3/23/2022,Settled,9200,001g500000LGxrGAAT,Equipment Malfunction,Machine guard failure resulted in laceration to left arm requiring stitches,005g5000006IYB3AAO
+WC-2022-008,4/19/2022,4/21/2022,Settled,6700,001g500000LGxrIAAT,Repetitive Motion,Lower back strain from repetitive heavy lifting over extended period,005g5000006IYB3AAO
+WC-2022-009,5/3/2022,5/6/2022,Settled,5600,001g500000LGxrGAAT,Slip and Fall,Employee slipped on metal shavings during manufacturing cleanup,005g5000006IYB3AAO
+WC-2022-010,5/17/2022,5/19/2022,Settled,11200,001g500000LGxrHAAT,Equipment Malfunction,Conveyor belt malfunction caused entrapment and hand injury,005g5000006IYB3AAO
+WC-2022-012,6/16/2022,6/18/2022,Settled,4200,001g500000LGxrHAAT,Slip and Fall,Employee slipped in parking lot during rainy conditions sustaining wrist fracture,005g5000006IYB3AAO
+WC-2022-013,7/7/2022,7/10/2022,Denied,0,001g500000LGxrJAAT,Repetitive Motion,Claim for chronic back pain denied due to pre-existing condition documentation,005g5000006IYB3AAO
+WC-2022-015,8/4/2022,8/6/2022,Settled,7800,001g500000LGxrIAAT,Struck By Object,Swinging warehouse door struck employee causing shoulder injury,005g5000006IYB3AAO
+WC-2022-017,9/3/2022,9/6/2022,Settled,6100,001g500000LGxrGAAT,Slip and Fall,Employee fell from step stool while accessing overhead storage area,005g5000006IYB3AAO
+WC-2022-018,9/16/2022,9/18/2022,Settled,5500,001g500000LGxrFAAT,Repetitive Motion,Carpal tunnel syndrome developed from prolonged keyboard and mouse use,005g5000006IYB3AAO
+WC-2022-021,11/5/2022,11/8/2022,Settled,8900,001g500000LGxrIAAT,Slip and Fall,Employee slipped on ice in loading zone causing hip contusion,005g5000006IYB3AAO
+WC-2022-022,11/19/2022,11/22/2022,Denied,0,001g500000LGxrFAAT,Repetitive Motion,Claim denied after investigation found injury occurred outside of work hours,005g5000006IYB3AAO
+WC-2022-024,12/15/2022,12/17/2022,Settled,4300,001g500000LGxrJAAT,Slip and Fall,Employee slipped on freshly mopped floor in common area,005g5000006IYB3AAO
+WC-2022-025,12/29/2022,12/31/2022,Settled,6800,001g500000LGxrJAAT,Struck By Object,Loose overhead cabinet fell and struck employee causing head laceration,005g5000006IYB3AAO
+WC-2023-005,3/7/2023,3/9/2023,Settled,6200,001g500000LGxrFAAT,Slip and Fall,Warehouse associate slipped on oil spill in vehicle bay causing back strain,005g5000006IYB3AAO
+WC-2023-017,8/25/2023,8/28/2023,Settled,9800,001g500000LGxrFAAT,Equipment Malfunction,Warehouse equipment pinch point injury to fingers requiring medical treatment,005g5000006IYB3AAO
+WC-2023-008,4/19/2023,4/22/2023,Settled,22000,001g500000LGxrGAAT,Equipment Malfunction,CNC machine guard failure caused serious laceration to right hand,005g5000006IYB3AAO
+WC-2023-003,2/8/2023,2/10/2023,Settled,13500,001g500000LGxrHAAT,Struck By Object,Heavy pipe fell from overhead rack and struck maintenance worker,005g5000006IYB3AAO
+WC-2023-020,10/11/2023,10/14/2023,Settled,8800,001g500000LGxrHAAT,Slip and Fall,Maintenance technician slipped on wet roof surface during safety inspection,005g5000006IYB3AAO
+WC-2023-004,2/22/2023,2/24/2023,Settled,25000,001g500000LGxrIAAT,Equipment Malfunction,Forklift hydraulic failure caused operator to be thrown resulting in significant back injury,005g5000006IYB3AAO
+WC-2023-025,12/12/2023,12/14/2023,In Review,0,001g500000LGxrIAAT,Struck By Object,Claim under review after load-shifting incident injured forklift operator,005g5000006IYB3AAO
+WC-2023-010,5/17/2023,5/20/2023,Settled,8200,001g500000LGxrFAAT,Equipment Malfunction,Pallet jack malfunction caused two warehouse workers to sustain foot injuries (group claim),005g5000006IYB3AAO
+WC-2023-022,11/8/2023,11/10/2023,Settled,11000,001g500000LGxrFAAT,Slip and Fall,Warehouse lead slipped on ice patch near dock door causing knee injury,005g5000006IYB3AAO
+WC-2023-013,6/30/2023,7/3/2023,Settled,7500,001g500000LGxrGAAT,Slip and Fall,Quality inspector slipped on wet inspection floor causing ankle sprain,005g5000006IYB3AAO
+WC-2023-014,7/14/2023,7/17/2023,Settled,9200,001g500000LGxrGAAT,Equipment Malfunction,Inspection equipment short-circuit caused minor burn injury to hand,005g5000006IYB3AAO
+WC-2023-018,9/8/2023,9/11/2023,Settled,9500,001g500000LGxrJAAT,Struck By Object,HVAC component dislodged during repair and struck technician on upper arm,005g5000006IYB3AAO
+WC-2023-007,4/5/2023,4/8/2023,Settled,6800,001g500000LGxrHAAT,Slip and Fall,Operations coordinator slipped on wet stairs causing wrist sprain,005g5000006IYB3AAO
+WC-2023-023,11/20/2023,11/22/2023,Settled,8100,001g500000LGxrHAAT,Struck By Object,Unsecured cart rolled into employee in operations corridor causing leg bruising,005g5000006IYB3AAO
+WC-2023-001,1/10/2023,1/12/2023,Settled,7200,001g500000LGxrHAAT,Slip and Fall,Employee slipped on wet surface near break room causing hip injury,005g5000006IYB3AAO
+WC-2023-002,1/24/2023,1/26/2023,Settled,5800,001g500000LGxrJAAT,Equipment Malfunction,Welding equipment malfunction caused minor burns to forearm,005g5000006IYB3AAO
+WC-2023-006,3/21/2023,3/23/2023,Settled,8400,001g500000LGxrJAAT,Repetitive Motion,Electrician developed repetitive motion shoulder injury from sustained overhead wiring work,005g5000006IYB3AAO
+WC-2023-009,5/3/2023,5/6/2023,Settled,9100,001g500000LGxrHAAT,Struck By Object,Production employee struck by rolling cart in manufacturing corridor,005g5000006IYB3AAO
+WC-2023-011,6/2/2023,6/5/2023,Settled,5400,001g500000LGxrHAAT,Repetitive Motion,Logistics coordinator developed wrist strain from extended data entry work,005g5000006IYB3AAO
+WC-2023-012,6/16/2023,6/19/2023,Settled,18500,001g500000LGxrIAAT,Struck By Object,Stack of bagged materials shifted and fell on forklift operator,005g5000006IYB3AAO
+WC-2023-015,7/28/2023,7/31/2023,In Review,0,001g500000LGxrFAAT,Struck By Object,Warehouse worker reports being struck by loading equipment — investigation ongoing,005g5000006IYB3AAO
+WC-2023-016,8/11/2023,8/14/2023,Settled,7300,001g500000LGxrHAAT,Slip and Fall,Maintenance supervisor slipped on freshly sealed floor in equipment room,005g5000006IYB3AAO
+WC-2023-019,9/22/2023,9/25/2023,Settled,11100,001g500000LGxrIAAT,Repetitive Motion,Grounds maintenance employee developed knee pain from prolonged kneeling,005g5000006IYB3AAO
+WC-2023-021,10/25/2023,10/28/2023,Settled,6300,001g500000LGxrGAAT,Slip and Fall,Employee slipped on slick entryway floor during morning arrival,005g5000006IYB3AAO
+WC-2023-024,12/1/2023,12/4/2023,Settled,4900,001g500000LGxrFAAT,Slip and Fall,Safety officer slipped on ice near site perimeter during routine walkthrough,005g5000006IYB3AAO
+WC-2024-001,1/10/2024,1/13/2024,In Review,0,001g500000LGxrGAAT,Equipment Malfunction,Machine component failure under investigation for potential hand injury,005g5000006IYB3AAO
+WC-2024-018,9/4/2024,9/7/2024,Settled,12000,001g500000LGxrGAAT,Struck By Object,Moving manufacturing component struck employee on upper arm,005g5000006IYB3AAO
+WC-2024-003,2/7/2024,2/10/2024,In Review,0,001g500000LGxrFAAT,Struck By Object,Warehouse associate struck by unsecured pallet — investigation ongoing,005g5000006IYB3AAO
+WC-2024-013,7/1/2024,7/5/2024,Open,0,001g500000LGxrFAAT,Slip and Fall,New claim filed for slip-and-fall incident in receiving area,005g5000006IYB3AAO
+WC-2024-008,4/15/2024,4/18/2024,Settled,8800,001g500000LGxrHAAT,Equipment Malfunction,Power line contact during exterior maintenance caused hand burns,005g5000006IYB3AAO
+WC-2024-020,10/22/2024,10/25/2024,Open,0,001g500000LGxrHAAT,Slip and Fall,New claim filed for slip in maintenance storage area,005g5000006IYB3AAO
+WC-2024-010,5/20/2024,5/23/2024,In Review,0,001g500000LGxrIAAT,Equipment Malfunction,Forklift brake malfunction under review following near-miss incident,005g5000006IYB3AAO
+WC-2024-021,11/5/2024,11/8/2024,Open,0,001g500000LGxrIAAT,Struck By Object,Forklift operator claims shifting load struck vehicle during tight maneuver,005g5000006IYB3AAO
+WC-2024-016,8/12/2024,8/14/2024,In Review,0,001g500000LGxrFAAT,Struck By Object,Warehouse lead struck by swinging dock door — claim under review,005g5000006IYB3AAO
+WC-2024-005,3/5/2024,3/7/2024,Settled,9200,001g500000LGxrGAAT,Slip and Fall,Quality inspector slipped on product spill causing shoulder strain,005g5000006IYB3AAO
+WC-2024-014,7/18/2024,7/21/2024,Settled,11500,001g500000LGxrGAAT,Equipment Malfunction,Conveyor belt speed anomaly caused employee contact injury (group claim),005g5000006IYB3AAO
+WC-2024-009,5/2/2024,5/5/2024,Open,0,001g500000LGxrJAAT,Equipment Malfunction,HVAC technician reports equipment-related shoulder injury during installation,005g5000006IYB3AAO
+WC-2024-017,8/28/2024,8/30/2024,In Review,0,001g500000LGxrHAAT,Slip and Fall,Operations coordinator slipped on wet tile in office corridor — under review,005g5000006IYB3AAO
+WC-2024-002,1/25/2024,1/28/2024,Settled,5100,001g500000LGxrJAAT,Repetitive Motion,Assembly worker developed finger tendinitis from sustained repetitive motion,005g5000006IYB3AAO
+WC-2024-004,2/20/2024,2/22/2024,Settled,7400,001g500000LGxrHAAT,Slip and Fall,Employee slipped on uneven pavement outside delivery entrance,005g5000006IYB3AAO
+WC-2024-006,3/18/2024,3/20/2024,Settled,9800,001g500000LGxrIAAT,Equipment Malfunction,Loader arm equipment failure resulted in shoulder impact injury,005g5000006IYB3AAO
+WC-2024-007,4/2/2024,4/4/2024,Settled,6300,001g500000LGxrFAAT,Struck By Object,Employee struck by hand truck in narrow warehouse aisle,005g5000006IYB3AAO
+WC-2024-011,6/10/2024,6/12/2024,Settled,8600,001g500000LGxrIAAT,Slip and Fall,Worker slipped in refrigerated storage area causing knee sprain,005g5000006IYB3AAO
+WC-2024-012,6/25/2024,6/27/2024,Settled,5900,001g500000LGxrJAAT,Struck By Object,Tool fell from elevated work platform and struck employee below,005g5000006IYB3AAO
+WC-2024-015,7/30/2024,8/1/2024,Settled,7200,001g500000LGxrFAAT,Repetitive Motion,Payroll specialist developed RSI from sustained high-volume data processing,005g5000006IYB3AAO
+WC-2024-019,10/8/2024,10/10/2024,Open,0,001g500000LGxrJAAT,Struck By Object,Inventory specialist reports back injury from falling storage bin,005g5000006IYB3AAO
+WC-2024-022,11/19/2024,11/21/2024,Open,0,001g500000LGxrJAAT,Repetitive Motion,Electrician reports new shoulder strain from sustained overhead installation work,005g5000006IYB3AAO
+WC-2024-023,12/3/2024,12/5/2024,Open,0,001g500000LGxrGAAT,Struck By Object,Quality inspector reports being struck by roller on inspection line,005g5000006IYB3AAO
+WC-2024-024,12/10/2024,12/12/2024,Open,0,001g500000LGxrHAAT,Slip and Fall,Loader slipped in icy conditions near dock entrance,005g5000006IYB3AAO
+WC-2024-025,12/20/2024,12/23/2024,Open,0,001g500000LGxrGAAT,Struck By Object,Network engineer reports head injury from open cabinet door in server room,005g5000006IYB3AAO
